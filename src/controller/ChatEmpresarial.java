@@ -11,14 +11,12 @@ public class ChatEmpresarial extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("/view/Login.fxml"));
-        primaryStage.setTitle("LOGINCLIENTE");
+        Parent root = FXMLLoader.load(getClass().getResource("/view/SalaChat.fxml"));
+        primaryStage.setTitle("SALA");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
         
-       
     }
-
 
     public static void main(String[] args) {
         launch(args);

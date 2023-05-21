@@ -7,12 +7,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="393.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SalaChatControlador">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="393.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SalaChatControlador">
    <children>
       <Button fx:id="botnEnviar" layoutX="244.0" layoutY="296.0" mnemonicParsing="false" onAction="#EnviarMensaje" text="Enviar" />
       <TextField fx:id="txtEscribirMensajes" layoutX="14.0" layoutY="296.0" prefHeight="25.0" prefWidth="228.0" promptText="Mensaje" />
       <TextArea fx:id="txtMostrarChat" editable="false" layoutX="14.0" layoutY="58.0" prefHeight="228.0" prefWidth="228.0" />
-      <Label layoutX="36.0" layoutY="14.0" text="Chat">
+      <Label layoutX="14.0" layoutY="15.0" text="Chat">
          <font>
             <Font size="30.0" />
          </font>
@@ -23,5 +23,7 @@
          </font>
       </Label>
       <TextArea fx:id="txtMostrarActivos" editable="false" layoutX="256.0" layoutY="58.0" prefHeight="228.0" prefWidth="108.0" />
+      <TextField fx:id="txtNombre" layoutX="82.0" layoutY="25.0" prefHeight="25.0" prefWidth="77.0" promptText="nombre" />
+      <Button fx:id="botnConectar" layoutX="171.0" layoutY="25.0" mnemonicParsing="false" onAction="#Conectar" style="-fx-background-color: #42F412;" text="Conectar" />
    </children>
 </AnchorPane>
