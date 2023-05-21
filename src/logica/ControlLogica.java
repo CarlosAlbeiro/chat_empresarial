@@ -18,7 +18,7 @@ public class ControlLogica {
 		
 		usuarios=archivo.cargarUsuarios();
 		
-		Usuario usuario= new Usuario(nombre, apellido,cedula, programa, clave);
+		Usuario usuario= new Usuario(nombre);
 		System.out.println("usuarios: "+usuario.toString());
 
 		usuarios.add(usuario);

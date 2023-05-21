@@ -12,17 +12,10 @@ public class Hilocliente extends Thread {
 	private Socket cliente;
 	private DataInputStream recibir;
 	private ServidorControlador servidor;
-	
-	private static Vector<HiloServidor> usuariosActivos= new Vector<>();
+
 	private String nombre;
 	
-	
-	
-	
-	
-	
-
-	public HiloServidor( Socket clientes, String nombres,ServidorControlador servi) throws Exception {
+	public HiloCliente( Socket clientes,ServidorControlador servi) throws Exception {
 		
 		this.servidor = servi;
 		this.cliente = clientes;

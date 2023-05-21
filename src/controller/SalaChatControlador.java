@@ -3,6 +3,7 @@ package controller;
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -50,6 +51,7 @@ public class SalaChatControlador  {
   
     public Funciones f=new Funciones();
     private String nombreUsuario;
+	private Socket cliente;
  
     
     public SalaChatControlador() {
@@ -60,7 +62,9 @@ public class SalaChatControlador  {
     void Conectar(ActionEvent event) {
     	nombreUsuario= txtNombre.getText();
     	System.out.println("Me voy a conectar");
-    	f.conectar();
+    	cliente=f.conectar();
+    	Thread hiloRespuestas= new Thread(new Entrada());
+    	hiloRespuestas.start();
     	
 		f.ingreso(nombreUsuario);
 
@@ -69,36 +73,30 @@ public class SalaChatControlador  {
     public void EnviarMensaje(ActionEvent event) {
         String mensaje = txtEscribirMensajes.getText();
         f.enviarMensaje(mensaje);
+//        txtMostrarChat.appendText(mensaje);
        
         txtEscribirMensajes.clear();
 
     }
     
-
-//	public void closeWindows() {
-//		 try {   
-//             FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/login.fxml"));
-//              
-//              Parent root = loader.load();
-//     
-//      
-//              //Controlador de la vista
-//              LoginControlador controlador = loader.getController();//poner la clase del controlador 
-////              controlador.setNombreUsuario(nombreUsuario);
-//              Scene scene = new Scene(root);
-//              Stage stage = new Stage ();
-//             
-//              stage.setScene(scene);
-//              stage.show();
-//            
-//              //Stage cerrarPantalla = (Stage) this.botonRegistrar.getScene().getWindow();
-//              //cerrarPantalla.close();
-//		  } catch (IOException ex) {
-//	            System.out.println("Errorrr..");
-//	        }
-//		
-//	}
-//	
-	
-	
+   
+    
+    public class Entrada implements Runnable {
+    	public void run() {
+    		try {
+				String mensaje;
+				InputStream inStream =null;
+				while (true) {
+					inStream = cliente.getInputStream();
+					DataInputStream respuestaServidor= new DataInputStream(inStream);
+					String respuesta = respuestaServidor.readUTF();
+					txtMostrarChat.appendText(respuesta+"\n");
+				}
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+    	}
+    }
+    
+    
 }

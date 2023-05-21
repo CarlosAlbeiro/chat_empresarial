@@ -39,9 +39,6 @@ public class HiloServidor extends Thread {
 	
 	public void run(){
 		
-		
-		
-		
 		servidor.mostrarMensaje(nombre+" se conecto a la sala");
 		String mensaje= " ";
 		while (true) {
@@ -61,7 +58,7 @@ public class HiloServidor extends Thread {
 				for (int i = 0; i < usuariosActivos.size(); i++) {
 					System.out.println("en el bucle para enviar");
 					usuariosActivos.get(i).mensaje(mensaje);
-					servidor.mostrarMensaje("Mensjae enviado");
+					servidor.mostrarMensaje("Mensjae enviado"+usuariosActivos.get(i));
 				}
 			} catch (Exception e) {
 				break;
@@ -69,16 +66,19 @@ public class HiloServidor extends Thread {
 			
 		}
 		
+		servidor.mostrarMensaje(nombre+" desconectado");
 		usuariosActivos.removeElement(this);
-		servidor.mostrarMensaje("Usuario desconectado");
+		try {
+			cliente.close();
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		
 	}
 	
 	private void mensaje(String msj) throws Exception{
-		
 		enviar=new DataOutputStream(cliente.getOutputStream());
-		enviar.writeUTF(msj);
-		
+		enviar.writeUTF(nombre+": "+msj);
 		for (int i = 0; i < usuariosActivos.size(); i++) {
 			System.out.println(usuariosActivos.get(i).nombre);
 		}	
