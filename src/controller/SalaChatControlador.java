@@ -104,29 +104,22 @@ public class SalaChatControlador  {
 					DataInputStream respuestaServidor= new DataInputStream(inStream);
 					String respuesta = respuestaServidor.readUTF();
 					txtMostrarChat.appendText(respuesta+"\n");
-					
-					
+			
 					listaEntrante=new ObjectInputStream(cliente.getInputStream());
 					
 					Object objetoRecibido =listaEntrante.readObject();
-					
+		
 					if (objetoRecibido instanceof ArrayList<?>) {
 					    ArrayList<String> listaRecibida = (ArrayList<String>) objetoRecibido;
-					    
 					    // Convierte el ArrayList a ObservableList
 					    ObservableList<String> observableList = FXCollections.observableArrayList(listaRecibida);
 					    
-
 						Platform.runLater(()->{
 							// Agrega la lista al ListView
 						    listActivos.setItems(observableList);
 						});
-					 
-					    
 					}
-					
 				}
-				
 			} catch (Exception e) {
 				try {
 					cliente.close();

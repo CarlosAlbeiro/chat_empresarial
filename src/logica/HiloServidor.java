@@ -10,6 +10,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Vector;
 
+import Archivo.Archivos;
 import controller.ServidorControlador;
 
 public class HiloServidor extends Thread {
@@ -21,6 +22,7 @@ public class HiloServidor extends Thread {
 	private static Vector<HiloServidor> usuariosActivos= new Vector<>();
 	private String nombre;
 	private ObjectOutputStream listaObjeto;
+	private Archivos a =new Archivos();
 	
 	public HiloServidor( Socket clientes, String cliente,ServidorControlador servi) {
 		System.out.println("HiloServidor soy el hilo del cliente: "+cliente);
@@ -32,6 +34,8 @@ public class HiloServidor extends Thread {
 		for (int i = 0; i < usuariosActivos.size(); i++) {
 			try {
 				usuariosActivos.get(i).mensaje(nombre+" conectado");
+				a.guardarUsuarios(nombre+" conectado");
+				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -74,6 +78,7 @@ public class HiloServidor extends Thread {
 				e.printStackTrace();
 			}
 		}
+		a.guardarUsuarios(nombre+" desconectado");
 		servidor.mostrarMensaje(nombre+" desconectado");
 		
 		try {
