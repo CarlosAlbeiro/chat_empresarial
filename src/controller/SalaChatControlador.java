@@ -73,6 +73,7 @@ public class SalaChatControlador  {
     	System.out.println("Me voy a conectar");
     	cliente=f.conectar();
     	Thread hiloRespuestas= new Thread(new Entrada());
+    	hiloRespuestas.setDaemon(true);
     	hiloRespuestas.start();
     	
 		f.ingreso(nombreUsuario);
@@ -91,8 +92,9 @@ public class SalaChatControlador  {
     }
     
    
-    
+  
     public class Entrada implements Runnable {
+
     	public void run() {
     		try {
 				String mensaje;
