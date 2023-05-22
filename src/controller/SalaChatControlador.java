@@ -134,7 +134,7 @@ public class SalaChatControlador  {
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Campo Vacío");
             alert.setHeaderText(null);
-            alert.setContentText("El campo está vacío. Por favor, ingresa un valor.");
+            alert.setContentText("El campo está vacío. Por favor, ingresa un mensaje.");
             alert.showAndWait();
         } else {
         
