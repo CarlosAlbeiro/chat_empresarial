@@ -14,6 +14,8 @@ public class ChatEmpresarial extends Application {
         Parent root = FXMLLoader.load(getClass().getResource("/view/SalaChat.fxml"));
         primaryStage.setTitle("SALA");
         primaryStage.setScene(new Scene(root));
+        
+       
         primaryStage.show();
         
     }

@@ -12,6 +12,10 @@ public class MainServidor extends Application {
     	Parent root = FXMLLoader.load(getClass().getResource("../view/Servidor.fxml"));
         primaryStage.setTitle("Servidor");
         primaryStage.setScene(new Scene(root));
+        
+        primaryStage.setX(960);
+        primaryStage.setY(40);
+        
         primaryStage.show();
         
     }
