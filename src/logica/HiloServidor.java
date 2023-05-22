@@ -3,6 +3,7 @@ package logica;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.InputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,6 +20,7 @@ public class HiloServidor extends Thread {
 	private Socket cliente;
 	private static Vector<HiloServidor> usuariosActivos= new Vector<>();
 	private String nombre;
+	private ObjectOutputStream listaObjeto;
 	
 	public HiloServidor( Socket clientes, String cliente,ServidorControlador servi) {
 		System.out.println("HiloServidor soy el hilo del cliente: "+cliente);
@@ -44,22 +46,18 @@ public class HiloServidor extends Thread {
 		while (true) {
 			try {
 				 // Obtener los flujos de entrada y salida del socket
-				InputStream entrada=cliente.getInputStream();
-	
-	            DataInputStream lectorEntrada = new DataInputStream(entrada);
-				
-	            
-	            // Recibir datos del cliente
-	            mensaje = lectorEntrada.readUTF();
-	            servidor.mostrarMensaje("Mensaje recibido: "+mensaje);
-	            System.out.println("Mensaje recibido del cliente: " + mensaje);
 
-				servidor.mostrarMensaje(mensaje);
+	            DataInputStream lectorEntrada = new DataInputStream(cliente.getInputStream());
+	            
+	            mensaje = lectorEntrada.readUTF();
+	            
+	            servidor.mostrarMensaje("Mensaje recibido: "+mensaje);
+
 				for (int i = 0; i < usuariosActivos.size(); i++) {
-					System.out.println("en el bucle para enviar");
-					usuariosActivos.get(i).mensaje(mensaje);
-					servidor.mostrarMensaje("Mensjae enviado"+usuariosActivos.get(i));
+					usuariosActivos.get(i).mensaje(nombre+": "+mensaje);
+					servidor.mostrarMensaje("Mensjae enviado "+usuariosActivos.get(i).nombre);
 				}
+				
 			} catch (Exception e) {
 				break;
 			}
@@ -68,6 +66,7 @@ public class HiloServidor extends Thread {
 		
 		servidor.mostrarMensaje(nombre+" desconectado");
 		usuariosActivos.removeElement(this);
+		
 		try {
 			cliente.close();
 		} catch (Exception e) {
@@ -78,10 +77,17 @@ public class HiloServidor extends Thread {
 	
 	private void mensaje(String msj) throws Exception{
 		enviar=new DataOutputStream(cliente.getOutputStream());
-		enviar.writeUTF(nombre+": "+msj);
+		enviar.writeUTF(msj);
+	
+		ArrayList<String> modelo= new ArrayList<>();
+		
 		for (int i = 0; i < usuariosActivos.size(); i++) {
-			System.out.println(usuariosActivos.get(i).nombre);
+			modelo.add(usuariosActivos.get(i).nombre);
 		}	
+		listaObjeto=new ObjectOutputStream(cliente.getOutputStream());
+		listaObjeto.writeObject(modelo);
+		
+		
 	}
 	
 }
