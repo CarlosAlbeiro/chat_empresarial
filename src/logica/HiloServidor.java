@@ -16,36 +16,52 @@ import controller.ServidorControlador;
 
 public class HiloServidor extends Thread {
 	
-	private DataInputStream recibir;
+	//Variable para enviar datos
 	private DataOutputStream enviar;
-	private ServidorControlador servidor;
-	private Socket cliente;
-	private static Vector<HiloServidor> usuariosActivos= new Vector<>();
-	private String nombre;
+	//Variable tipo objeto para enviar la lista de usuarios activos 
 	private ObjectOutputStream listaObjeto;
+	//Varible tipo servidor para que el hilo tenga las propiedades del servidor
+	private ServidorControlador servidor;
+	//Socket del cliente al que va a atender el servidor
+	private Socket cliente;
+	//Vector de usuarios creados, donde se almacena los hilos que se van creando
+	private static Vector<HiloServidor> usuariosActivos= new Vector<>();
+	//Variable para almacenar el nombre del usuario
+	private String nombre;
+	//Instancia para poder leer y escribir los archivos
 	private Archivos a =new Archivos();
+	//Instacia para saber la fecha actual
 	private Date fecha= new Date();
+	private int peticion=0;
 	
-	
-	public HiloServidor( Socket clientes, String cliente,ServidorControlador servi) {
-		System.out.println("HiloServidor soy el hilo del cliente: "+cliente);
-		a.guardarUsuarios(cliente+" se conecto\n"+fecha);
-		this.servidor = servi;
-		this.cliente = clientes;
-		this.nombre = cliente;
-		usuariosActivos.add(this);
-		for (int i = 0; i < usuariosActivos.size(); i++) {
-			try {
-				usuariosActivos.get(i).mensaje(nombre+" se conecto");
-				
-				
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+	//Hilo encargado de las peticiones del cliente
+	public HiloServidor( Socket clientes, String cliente,ServidorControlador servi) throws Excepciones {
+		
+		if (verificarNombre(cliente)) {
+			throw new Excepciones("El nombre no está disponible");
+		}else {
+			System.out.println("HiloServidor soy el hilo del cliente: "+cliente);
+			a.guardarUsuarios(cliente+" se conecto hora: "+fecha+"\n");
+			this.servidor = servi;
+			this.cliente = clientes;
+			this.nombre = cliente;
+			usuariosActivos.add(this);
+			for (int i = 0; i < usuariosActivos.size(); i++) {
+				try {
+					usuariosActivos.get(i).mensaje(nombre+" se conecto");
+					
+					
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
+		
 	}
 	
+	
+	//Iniciamos el hilo
 	public void run(){
 		
 		servidor.mostrarMensaje(nombre+" se conecto a la sala");
@@ -57,6 +73,7 @@ public class HiloServidor extends Thread {
 	            DataInputStream lectorEntrada = new DataInputStream(cliente.getInputStream());
 	            
 	            mensaje = lectorEntrada.readUTF();
+	            System.out.println("Peticion Nº: "+peticion+"---"+mensaje);
 	            
 	            servidor.mostrarMensaje("Mensaje recibido: "+mensaje);
 
@@ -64,12 +81,13 @@ public class HiloServidor extends Thread {
 					usuariosActivos.get(i).mensaje(nombre+": "+mensaje);
 					servidor.mostrarMensaje("Mensjae enviado a: "+usuariosActivos.get(i).nombre);
 				}
-				
+				peticion++;
 			} catch (Exception e) {
 				break;
 			}
 			
 		}
+		
 		
 		usuariosActivos.removeElement(this);
 		for (int i = 0; i < usuariosActivos.size(); i++) {
@@ -80,7 +98,7 @@ public class HiloServidor extends Thread {
 				e.printStackTrace();
 			}
 		}
-		a.guardarUsuarios(nombre+" se desconecto"+fecha);
+		a.guardarUsuarios(nombre+" se desconecto hora: "+fecha);
 		servidor.mostrarMensaje(nombre+" se desconectado\n");
 		try {
 			cliente.close();
@@ -102,7 +120,21 @@ public class HiloServidor extends Thread {
 		listaObjeto=new ObjectOutputStream(cliente.getOutputStream());
 		listaObjeto.writeObject(modelo);
 		
-		
 	}
+	
+	private static boolean verificarNombre(String Nombre) {
+
+		Boolean disponible=false;
+		for (int i = 0; i < usuariosActivos.size(); i++) {
+			if(usuariosActivos.get(i).nombre.equals(Nombre)) {
+				disponible=true;
+				break;
+			}else {
+				disponible=false;
+			}
+		}
+		return disponible;
+	}
+	
 	
 }

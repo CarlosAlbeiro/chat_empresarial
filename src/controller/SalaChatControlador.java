@@ -18,6 +18,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.FocusModel;
 import javafx.scene.control.ListView;
@@ -75,9 +77,21 @@ public class SalaChatControlador  {
     	Thread hiloRespuestas= new Thread(new Entrada());
     	hiloRespuestas.setDaemon(true);
     	hiloRespuestas.start();
-    	botnConectar.setDisable(true);
+    	
     	
 		f.ingreso(nombreUsuario);
+    	if(cliente.isConnected()) {
+    		botnConectar.setDisable(true);
+    	    txtNombre.setDisable(true);
+    		
+		}else {
+			Alert alert = new Alert(Alert.AlertType. ERROR);
+            alert.setHeaderText(null);
+            alert.setTitle("Error");
+            alert.setContentText("Error nombre repetido");
+            alert.showAndWait();
+		}
+    	
 		
 
     }

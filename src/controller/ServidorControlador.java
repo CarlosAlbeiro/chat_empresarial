@@ -2,49 +2,29 @@ package controller;
 
 
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
+
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Observer;
-import java.util.Scanner;
+
+import java.util.Vector;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.TextArea;
+import logica.Excepciones;
 import logica.HiloServidor;
-import javafx.fxml.FXML;
-import javafx.scene.control.TextArea;
-
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 
-import javafx.fxml.FXML;
-import javafx.scene.control.TextArea;
-
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class ServidorControlador {
 
     @FXML
     private TextArea txtMostrarChat;
-    private List<String> guardarClientes = new ArrayList<>();
-    private ExecutorService executorService = Executors.newCachedThreadPool();
-    private Scanner scanner;
+    //Vector de usuarios creados, donde se almacena los hilos que se van creando
+//  	public static Vector<HiloServidor> usuariosActivos= new Vector<>();
+  	//Variable para enviar datos
+//  	private DataOutputStream enviar;
     private int puerto=8000;
 
     public void initialize() {
@@ -62,12 +42,24 @@ public class ServidorControlador {
                 Socket clienteSocket = serverSocket.accept();
                 mostrarMensaje("Cliente conectado: " + clienteSocket.getInetAddress());
                 
-                DataInputStream entrada= new DataInputStream(clienteSocket.getInputStream());
+                DataInputStream nombre= new DataInputStream(clienteSocket.getInputStream());
                 
                 System.out.println(" servidor: Disparo un hilo para el cliente");
-                HiloServidor hilo= new HiloServidor(clienteSocket, entrada.readUTF(), this);
                 
-                hilo.start();
+                
+                try {
+                	 HiloServidor hilo= new HiloServidor(clienteSocket, nombre.readUTF(), this);
+                	 hilo.start();
+//                	 usuariosActivos.add(hilo);
+                } catch (Excepciones e) {
+                	
+                    System.out.println("El nombre no está disponible. Por favor, elige otro nombre.");
+//                	enviar=new DataOutputStream(clienteSocket.getOutputStream());
+//            		enviar.writeUTF("Nombre repetido");
+                    clienteSocket.close();
+                    
+                    mostrarMensaje("Cliente desconectado: " + clienteSocket.getInetAddress()+" Nombre repetido");
+                }       
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -80,4 +72,6 @@ public class ServidorControlador {
     public void mostrarMensaje(String message) {
         txtMostrarChat.appendText(message + "\n");
     }
+    
+   
 }

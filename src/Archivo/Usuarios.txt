@@ -1,8 +1,0 @@
-inicio
-juan2 se conecto
-juan2 se desconectado
-pepe se conecto
-pepe se desconectado
-carlos se conecto
-Sun May 21 23:43:54 COT 2023
-carlos se desconectoSun May 21 23:43:54 COT 2023
