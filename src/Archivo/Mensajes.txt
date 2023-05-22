@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 carlos: hola -- Mon May 22 17:17:14 COT 2023
 ruben: todo bien? -- Mon May 22 17:17:21 COT 2023
 laura: si todo bien -- Mon May 22 17:17:26 COT 2023
@@ -99,3 +100,11 @@ Ruben: sda -- 22/5/2023/-18:4:32
 Ruben: asdas -- 22/5/2023/-18:4:32
 Ruben: sfs -- 22/5/2023/-18:4:32
 Ruben: cs -- 22/5/2023/-18:4:32
+=======
+carlos: hola -- 22/5/2023/-17:50:42
+camila: chao -- 22/5/2023/-17:51:14
+carlos: bueno -- 22/5/2023/-17:50:42
+natalia: msj de prueba -- 22/5/2023/-17:54:47
+ricardo: hola -- 22/5/2023/-17:57:39
+carlos: que mas -- 22/5/2023/-17:57:20
+>>>>>>> Stashed changes

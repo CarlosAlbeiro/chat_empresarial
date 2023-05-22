@@ -73,6 +73,21 @@ carlos se desconecto hora: Mon May 22 17:26:45 COT 2023
 carlos se conecto hora: Mon May 22 17:34:19 COT 2023
 Camila se conecto hora: Mon May 22 17:35:32 COT 2023
 carlos se desconecto hora: Mon May 22 17:34:19 COT 2023
+<<<<<<< Updated upstream
 Ruben se conecto hora: Mon May 22 18:04:32 COT 2023
 Samuel se conecto hora: Mon May 22 18:07:33 COT 2023
 Samuel se desconecto hora: Mon May 22 18:07:33 COT 2023
+=======
+carlos se conecto hora: Mon May 22 17:50:42 COT 2023
+camila se conecto hora: Mon May 22 17:51:14 COT 2023
+carlos se desconecto hora: Mon May 22 17:50:42 COT 2023
+camila se desconecto hora: Mon May 22 17:51:14 COT 2023
+carlos se conecto hora: Mon May 22 17:54:26 COT 2023
+natalia se conecto hora: Mon May 22 17:54:47 COT 2023
+carlos se desconecto hora: Mon May 22 17:54:26 COT 2023
+natalia se desconecto hora: Mon May 22 17:54:47 COT 2023
+carlos se conecto hora: Mon May 22 17:57:20 COT 2023
+ricardo se conecto hora: Mon May 22 17:57:39 COT 2023
+carlos se desconecto hora: Mon May 22 17:57:20 COT 2023
+ricardo se desconecto hora: Mon May 22 17:57:39 COT 2023
+>>>>>>> Stashed changes

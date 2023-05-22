@@ -66,6 +66,7 @@ public class HiloServidor extends Thread {
 			this.cliente = clientes;
 			this.nombre = cliente;
 			usuariosActivos.add(this);
+			envioHitorial();
 			for (int i = 0; i < usuariosActivos.size(); i++) {
 				try {
 					usuariosActivos.get(i).mensaje(nombre+" se conecto");
@@ -81,6 +82,27 @@ public class HiloServidor extends Thread {
 	}
 	
 	
+
+
+
+	private void envioHitorial() {
+		int numeroUsuarios=usuariosActivos.size();
+		String historial=a.leerArchivomensajes();
+		
+		try {
+			usuariosActivos.get(numeroUsuarios).Hitorial(historial);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+
+
+
+
+
 	//Iniciamos el hilo
 	public void run(){
 		
@@ -95,14 +117,13 @@ public class HiloServidor extends Thread {
 	            mensaje = lectorEntrada.readUTF();
 	            System.out.println("Peticion Nº: "+peticion+"---"+mensaje);
 	            
-	            servidor.mostrarMensaje("Mensaje recibido: "+mensaje);
-	            String msj=nombre+": "+mensaje;
-	            String historialMensajes = a.leerArchivomensajes();
+	            servidor.mostrarMensaje("Mensaje recibido: "+mensaje);         
+	            a.guardarMensajes(nombre+": "+mensaje+" -- "+hora1);
+	            
 				for (int i = 0; i < usuariosActivos.size(); i++) {
-					usuariosActivos.get(i).mensaje(historialMensajes+" "+msj);
+					usuariosActivos.get(i).mensaje(nombre+": "+mensaje+" -- "+hora1);
 					servidor.mostrarMensaje("Mensjae enviado a: "+usuariosActivos.get(i).nombre);
 				}
-				a.guardarMensajes(nombre+": "+mensaje+" -- "+hora1);
 				peticion++;
 			} catch (Exception e) {
 				break;
@@ -128,6 +149,10 @@ public class HiloServidor extends Thread {
 			// TODO: handle exception
 		}
 		
+	}
+	private void Hitorial(String msj) throws Exception{
+		enviar=new DataOutputStream(cliente.getOutputStream());
+		enviar.writeUTF(msj);
 	}
 	
 	private void mensaje(String msj) throws Exception{
@@ -157,6 +182,7 @@ public class HiloServidor extends Thread {
 		}
 		return disponible;
 	}
+	
 	
 	
 }
