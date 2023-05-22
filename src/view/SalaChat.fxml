@@ -8,12 +8,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="393.0" style="-fx-background-color: #DEE3E3;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SalaChatControlador">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="393.0" style="-fx-background-color: #DEE3E3;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SalaChatControlador">
    <children>
-      <Button fx:id="botnEnviar" layoutX="288.0" layoutY="296.0" mnemonicParsing="false" onAction="#EnviarMensaje" prefHeight="25.0" prefWidth="89.0" style="-fx-background-color: #1951F2;" text="Enviar" textFill="#f8f3f3" />
-      <TextField fx:id="txtEscribirMensajes" layoutX="14.0" layoutY="296.0" prefHeight="25.0" prefWidth="261.0" promptText="Mensaje" />
-      <TextArea fx:id="txtMostrarChat" editable="false" layoutX="14.0" layoutY="86.0" prefHeight="200.0" prefWidth="261.0" />
-      <Label layoutX="24.0" layoutY="50.0" text="Nombre:">
+      <Button fx:id="botnEnviar" layoutX="288.0" layoutY="296.0" mnemonicParsing="false" onAction="#EnviarMensaje" prefHeight="25.0" prefWidth="89.0" style="-fx-background-color: #1951F2; -fx-background-radius: 30;" text="Enviar" textFill="#f8f3f3" />
+      <TextField fx:id="txtEscribirMensajes" layoutX="14.0" layoutY="296.0" prefHeight="25.0" prefWidth="261.0" promptText="Mensaje" style="-fx-background-radius: 20;" />
+      <TextArea fx:id="txtMostrarChat" editable="false" layoutX="14.0" layoutY="86.0" prefHeight="200.0" prefWidth="261.0" style="-fx-border-color: #1951F2;" />
+      <Label layoutX="14.0" layoutY="51.0" text="Nombre:">
          <font>
             <Font name="Bauhaus 93" size="16.0" />
          </font>
@@ -23,9 +23,9 @@
             <Font name="Bauhaus 93" size="23.0" />
          </font>
       </Label>
-      <TextField fx:id="txtNombre" layoutX="85.0" layoutY="48.0" prefHeight="25.0" prefWidth="120.0" promptText="Ingrese su nombre" />
-      <Button fx:id="botnConectar" layoutX="210.0" layoutY="48.0" mnemonicParsing="false" onAction="#Conectar" style="-fx-background-color: #1EF2B2;" text="Conectar" textFill="#ebe8e8" />
-      <ListView fx:id="listActivos" layoutX="288.0" layoutY="86.0" prefHeight="200.0" prefWidth="89.0" />
+      <TextField fx:id="txtNombre" layoutX="79.0" layoutY="48.0" prefHeight="25.0" prefWidth="126.0" promptText="Ingrese su nombre" style="-fx-background-radius: 30;" />
+      <Button fx:id="botnConectar" layoutX="210.0" layoutY="48.0" mnemonicParsing="false" onAction="#Conectar" style="-fx-background-color: #1EF2B2; -fx-background-radius: 30;" text="Conectar" />
+      <ListView fx:id="listActivos" layoutX="288.0" layoutY="86.0" prefHeight="200.0" prefWidth="89.0" style="-fx-border-color: #1951F2;" />
       <Label layoutX="149.0" text="Chat">
          <font>
             <Font name="Bauhaus 93" size="38.0" />
