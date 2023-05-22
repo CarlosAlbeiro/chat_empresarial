@@ -76,6 +76,8 @@ public class SalaChatControlador  {
     	hiloRespuestas.start();
     	
 		f.ingreso(nombreUsuario);
+		
+		hiloRespuestas.interrupt();
 
     }
     
@@ -101,6 +103,7 @@ public class SalaChatControlador  {
 					String respuesta = respuestaServidor.readUTF();
 					txtMostrarChat.appendText(respuesta+"\n");
 					
+					
 					listaEntrante=new ObjectInputStream(cliente.getInputStream());
 					
 					Object objetoRecibido =listaEntrante.readObject();
@@ -111,22 +114,21 @@ public class SalaChatControlador  {
 					    // Convierte el ArrayList a ObservableList
 					    ObservableList<String> observableList = FXCollections.observableArrayList(listaRecibida);
 					    
-					    // Agrega la lista al ListView
-					    listActivos.setItems(observableList);
+
+						Platform.runLater(()->{
+							// Agrega la lista al ListView
+						    listActivos.setItems(observableList);
+						});
+					 
 					    
 					}
-					
-				
-					
-					
-					
-					
 					
 				}
 				
 			} catch (Exception e) {
 				try {
 					cliente.close();
+					
 				} catch (IOException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();

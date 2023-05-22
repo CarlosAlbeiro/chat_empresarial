@@ -55,7 +55,7 @@ public class HiloServidor extends Thread {
 
 				for (int i = 0; i < usuariosActivos.size(); i++) {
 					usuariosActivos.get(i).mensaje(nombre+": "+mensaje);
-					servidor.mostrarMensaje("Mensjae enviado "+usuariosActivos.get(i).nombre);
+					servidor.mostrarMensaje("Mensjae enviado a: "+usuariosActivos.get(i).nombre);
 				}
 				
 			} catch (Exception e) {
@@ -64,8 +64,17 @@ public class HiloServidor extends Thread {
 			
 		}
 		
-		servidor.mostrarMensaje(nombre+" desconectado");
+		
 		usuariosActivos.removeElement(this);
+		for (int i = 0; i < usuariosActivos.size(); i++) {
+			try {
+				usuariosActivos.get(i).mensaje(nombre+" desconectado ");
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		servidor.mostrarMensaje(nombre+" desconectado");
 		
 		try {
 			cliente.close();
