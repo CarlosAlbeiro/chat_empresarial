@@ -75,10 +75,10 @@ public class SalaChatControlador  {
     	Thread hiloRespuestas= new Thread(new Entrada());
     	hiloRespuestas.setDaemon(true);
     	hiloRespuestas.start();
+    	botnConectar.setDisable(true);
     	
 		f.ingreso(nombreUsuario);
 		
-		hiloRespuestas.interrupt();
 
     }
     

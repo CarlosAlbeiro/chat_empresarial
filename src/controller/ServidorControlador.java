@@ -49,6 +49,7 @@ public class ServidorControlador {
 
     public void initialize() {
         Thread hiloServidor = new Thread(this::startServer);
+        hiloServidor.setDaemon(true);
         hiloServidor.start();
     }
 
@@ -65,6 +66,7 @@ public class ServidorControlador {
                 
                 System.out.println(" servidor: Disparo un hilo para el cliente");
                 HiloServidor hilo= new HiloServidor(clienteSocket, entrada.readUTF(), this);
+                
                 hilo.start();
             }
         } catch (IOException e) {

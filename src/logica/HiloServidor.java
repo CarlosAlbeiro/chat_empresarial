@@ -7,6 +7,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.Vector;
 
@@ -23,18 +24,20 @@ public class HiloServidor extends Thread {
 	private String nombre;
 	private ObjectOutputStream listaObjeto;
 	private Archivos a =new Archivos();
+	private Date fecha= new Date();
+	
 	
 	public HiloServidor( Socket clientes, String cliente,ServidorControlador servi) {
 		System.out.println("HiloServidor soy el hilo del cliente: "+cliente);
+		a.guardarUsuarios(cliente+" se conecto\n"+fecha);
 		this.servidor = servi;
 		this.cliente = clientes;
 		this.nombre = cliente;
 		usuariosActivos.add(this);
-		
 		for (int i = 0; i < usuariosActivos.size(); i++) {
 			try {
-				usuariosActivos.get(i).mensaje(nombre+" conectado");
-				a.guardarUsuarios(nombre+" conectado");
+				usuariosActivos.get(i).mensaje(nombre+" se conecto");
+				
 				
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
@@ -68,19 +71,17 @@ public class HiloServidor extends Thread {
 			
 		}
 		
-		
 		usuariosActivos.removeElement(this);
 		for (int i = 0; i < usuariosActivos.size(); i++) {
 			try {
-				usuariosActivos.get(i).mensaje(nombre+" desconectado ");
+				usuariosActivos.get(i).mensaje(nombre+" se desconecto ");
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
-		a.guardarUsuarios(nombre+" desconectado");
-		servidor.mostrarMensaje(nombre+" desconectado");
-		
+		a.guardarUsuarios(nombre+" se desconecto"+fecha);
+		servidor.mostrarMensaje(nombre+" se desconectado\n");
 		try {
 			cliente.close();
 		} catch (Exception e) {

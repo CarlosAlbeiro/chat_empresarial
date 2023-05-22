@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -13,6 +14,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 
 import logica.Mensaje;
+
 
 
 
@@ -25,22 +27,37 @@ public class Archivos {
 	public static final String RUTA_ARCHIVO_MENSAJES = "src/Archivo/Meensajes.txt";
 	// Vamos a guardar historial de inicio sesion, usuarios, mensajes 
 	
+	
+	public String leerArchivo() {
+    StringBuilder contenido = new StringBuilder();
+    try {
+        FileReader fileReader = new FileReader(RUTA_ARCHIVO_USUARIOS);
+        BufferedReader bufferedReader = new BufferedReader(fileReader);
+
+        String linea;
+        while ((linea = bufferedReader.readLine()) != null) {
+            // Concatenar la línea leída al contenido
+            contenido.append(linea+"\n");
+        }
+
+        bufferedReader.close();
+        fileReader.close();
+    } catch (IOException e) {
+        System.out.println("Error al leer el archivo");
+        e.printStackTrace();
+    }
+    // Devolver el contenido como una cadena
+    return contenido.toString();
+}
+	
 	//Escribir el archvio de usuario
 	public void guardarUsuarios(String usuario) {
+		String lectura=leerArchivo();
 		try {
-//			FileOutputStream f = new FileOutputStream(new File(RUTA_ARCHIVO_USUARIOS));
-//			ObjectOutputStream o = new ObjectOutputStream(f);
-//
-//			// Write objects to file
-//			o.writeObject(usuario);
-//
-//			o.close();
-//			f.close();
-		
 			FileWriter fileWriter = new FileWriter(RUTA_ARCHIVO_USUARIOS);
 	        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
 
-	        bufferedWriter.write(usuario+"\n");
+	        bufferedWriter.write(lectura+""+usuario);
 
 	        bufferedWriter.close();
 	        fileWriter.close();
