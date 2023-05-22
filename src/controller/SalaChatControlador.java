@@ -1,45 +1,38 @@
 package controller;
 
-import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.PrintWriter;
 import java.net.Socket;
-import java.util.Observable;
-import java.util.Observer;
-import java.util.Scanner;
-
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
-import javafx.scene.control.FocusModel;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import logica.Funciones;
-
 import java.util.ArrayList;
-import java.util.List;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
-import javafx.collections.ObservableList;
-import javafx.scene.control.ListView;
+/**
+ * 
+ * @author Carlos Galeano
+ * @author Ruben Garrido
+ * 
+ *  Description:
+ *  Esta Se utiliza para controlar la lógica y la interacción de la interfaz gráfica de usuario de una sala de chat.
+ *  La clase tiene variables globales y métodos para realizar operaciones de conexión y comunicación con un servidor de chat.
+ *  La clase interna Entrada implementa la interfaz Runnable y se utiliza como hilo para recibir y mostrar las respuestas del servidor de chat.
+ *  También maneja la recepción de una lista de usuarios activos y la muestra en el ListView llamado listActivos.
+ */
+ 
+
 
 public class SalaChatControlador  {
 
@@ -47,18 +40,15 @@ public class SalaChatControlador  {
     private Button botnConectar;
 	@FXML
     private Button botnEnviar;
-
     @FXML
     private TextField txtEscribirMensajes;
-
     @FXML
     private TextArea txtMostrarChat;
-
     @FXML
     private TextField txtNombre;
     @FXML
+    //variables globales
     private ListView<String> listActivos;
-  
     public Funciones f=new Funciones();
     private String nombreUsuario;
 	private Socket cliente;
@@ -69,43 +59,105 @@ public class SalaChatControlador  {
     	   
     }
 
+    //Metodo conectar al servidor 
     @FXML
     void Conectar(ActionEvent event) {
     	nombreUsuario= txtNombre.getText();
-    	System.out.println("Me voy a conectar");
-    	cliente=f.conectar();
-    	Thread hiloRespuestas= new Thread(new Entrada());
-    	hiloRespuestas.setDaemon(true);
-    	hiloRespuestas.start();
     	
     	
-		f.ingreso(nombreUsuario);
-    	if(cliente.isConnected()) {
-    		botnConectar.setDisable(true);
-    	    txtNombre.setDisable(true);
-    		
-		}else {
-			Alert alert = new Alert(Alert.AlertType. ERROR);
+    	//Validacion de campos De nombre 
+    	if (nombreUsuario == null || nombreUsuario.trim().isEmpty()) {
+            // El TextField está vacío
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Campo Vacío");
             alert.setHeaderText(null);
-            alert.setTitle("Error");
-            alert.setContentText("Error nombre repetido");
+            alert.setContentText("El campo está vacío. Por favor, ingresa un nombre.");
             alert.showAndWait();
-		}
+        } else {
+        
+        	System.out.println("Me voy a conectar");
+        	cliente=f.conectar();
+        	Thread hiloRespuestas= new Thread(new Entrada());
+        	hiloRespuestas.setDaemon(true);
+        	hiloRespuestas.start();
+        	botnConectar.setDisable(true);
+     	    txtNombre.setDisable(true);
+        	
+    		f.ingreso(nombreUsuario);
+           
+        }
     	
+    	//Validacion en proceso de funcionalidad
+//    	if(cliente.isConnected()) {
+//    		
+//    		
+//		}else {
+//			Alert alert = new Alert(Alert.AlertType. ERROR);
+//            alert.setHeaderText(null);
+//            alert.setTitle("Error");
+//            alert.setContentText("Error nombre repetido");
+//            alert.showAndWait();
+//		}
+    	
+    	
+    	//Actvia la teclado  "enter"
+    	txtEscribirMensajes.setOnKeyPressed(new  EventHandler<KeyEvent>() {
+
+			@Override
+			public void handle(KeyEvent event) {
+				
+				if (event.getCode() == KeyCode.ENTER) {
+					
+					
+					String mensaje = txtEscribirMensajes.getText();
+			        f.enviarMensaje(mensaje);
+			        txtEscribirMensajes.clear();
+
+                }
+				
+			}
+		});
 		
 
     }
     
+//----------------------------------------metodo enviar mensaje------------------------------------------------------    
+    
     public void EnviarMensaje(ActionEvent event) {
+    	
+    	
         String mensaje = txtEscribirMensajes.getText();
-        f.enviarMensaje(mensaje);
-//        txtMostrarChat.appendText(mensaje);
+        
+        
+        if (mensaje == null || mensaje.trim().isEmpty()) {
+            // El TextField está vacío
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Campo Vacío");
+            alert.setHeaderText(null);
+            alert.setContentText("El campo está vacío. Por favor, ingresa un valor.");
+            alert.showAndWait();
+        } else {
+        
+        	 
+            f.enviarMensaje(mensaje);
+            txtEscribirMensajes.clear();
+          
+            txtEscribirMensajes.clear();
+        	
+//            // El TextField contiene texto
+//            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//            alert.setTitle("Campo No Vacío");
+//            alert.setHeaderText(null);
+//            alert.setContentText("El campo contiene texto: " + mensaje);
+//            alert.showAndWait();
+        }
+                
+        
        
-        txtEscribirMensajes.clear();
 
     }
     
-   
+
   
     public class Entrada implements Runnable {
 

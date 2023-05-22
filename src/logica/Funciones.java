@@ -18,7 +18,7 @@ public class Funciones {
 		System.out.println("LLEGUE A LA FUNCION");
 		try {
 			System.out.println("Voy a conectar el socket");
-			cliente = new Socket("192.168.1.5", 8000);
+			cliente = new Socket("localHost", 8000);
 			return cliente;
 		} catch (IOException e) {
 			System.out.println("Entro al try");

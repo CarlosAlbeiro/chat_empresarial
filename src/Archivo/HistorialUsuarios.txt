@@ -73,3 +73,6 @@ carlos se desconecto hora: Mon May 22 17:26:45 COT 2023
 carlos se conecto hora: Mon May 22 17:34:19 COT 2023
 Camila se conecto hora: Mon May 22 17:35:32 COT 2023
 carlos se desconecto hora: Mon May 22 17:34:19 COT 2023
+Ruben se conecto hora: Mon May 22 18:04:32 COT 2023
+Samuel se conecto hora: Mon May 22 18:07:33 COT 2023
+Samuel se desconecto hora: Mon May 22 18:07:33 COT 2023
