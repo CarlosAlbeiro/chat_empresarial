@@ -97,7 +97,7 @@ public class Archivos {
 		
 		//Escribir el archvio de usuario
 	public void guardarMensajes(String mensaje) {
-			String lectura=leerArchivousuarios();
+			String lectura=leerArchivomensajes();
 			try {
 				FileWriter fileWriter = new FileWriter(RUTA_ARCHIVO_MENSAJES);
 		        BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);

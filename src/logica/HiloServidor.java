@@ -5,6 +5,8 @@ import java.io.DataOutputStream;
 import java.io.InputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -33,6 +35,24 @@ public class HiloServidor extends Thread {
 	//Instacia para saber la fecha actual
 	private Date fecha= new Date();
 	private int peticion=0;
+	// Obtener la hora actual
+	private LocalTime horaActual = LocalTime.now();
+    
+    // Obtener las partes de la hora (hora, minutos, segundos)
+    private int hora = horaActual.getHour();
+    private int minutos = horaActual.getMinute();
+    private int segundos = horaActual.getSecond();
+    
+    // Obtener la fecha actual
+    private LocalDate fechaActual = LocalDate.now();
+    
+    // Obtener las partes de la fecha (día, mes, año)
+    private int dia = fechaActual.getDayOfMonth();
+    private int mes = fechaActual.getMonthValue();
+    private int anio = fechaActual.getYear();
+    
+    private String hora1 = dia+"/"+mes+"/"+anio+"/"+"-"+hora+":"+minutos+":"+segundos;
+    
 	
 	//Hilo encargado de las peticiones del cliente
 	public HiloServidor( Socket clientes, String cliente,ServidorControlador servi) throws Excepciones {
@@ -76,11 +96,13 @@ public class HiloServidor extends Thread {
 	            System.out.println("Peticion Nº: "+peticion+"---"+mensaje);
 	            
 	            servidor.mostrarMensaje("Mensaje recibido: "+mensaje);
-
+	            String msj=nombre+": "+mensaje;
+	            String historialMensajes = a.leerArchivomensajes();
 				for (int i = 0; i < usuariosActivos.size(); i++) {
-					usuariosActivos.get(i).mensaje(nombre+": "+mensaje);
+					usuariosActivos.get(i).mensaje(historialMensajes+" "+msj);
 					servidor.mostrarMensaje("Mensjae enviado a: "+usuariosActivos.get(i).nombre);
 				}
+				a.guardarMensajes(nombre+": "+mensaje+" -- "+hora1);
 				peticion++;
 			} catch (Exception e) {
 				break;
