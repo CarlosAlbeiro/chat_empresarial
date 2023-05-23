@@ -6,7 +6,12 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-
+/**
+ * Esta clase arranca la ventana o interfaz de usuario.
+ * @author Ruben Garrido
+ * @author Carlos Galeano
+ *
+ */
 public class ChatEmpresarial extends Application {
 
     @Override

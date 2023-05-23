@@ -1,3 +1,4 @@
+
 package controller;
 
 import javafx.application.Application;
@@ -6,6 +7,15 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * Description:
+ * Esta Arranca la ventana del servidor 
+ * 
+ * @author Carlos Galeano
+ * @author Ruben Garrido
+ *
+ */
+
 public class MainServidor extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -13,6 +23,7 @@ public class MainServidor extends Application {
         primaryStage.setTitle("Servidor");
         primaryStage.setScene(new Scene(root));
         
+        // Cambia la posicon de la venta al arrancar 
         primaryStage.setX(960);
         primaryStage.setY(40);
         

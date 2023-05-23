@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="393.0" style="-fx-background-color: #DEE3E3;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SalaChatControlador">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="340.0" prefWidth="393.0" style="-fx-background-color: #DEE3E3;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.SalaChatControlador">
    <children>
       <Button fx:id="botnEnviar" layoutX="288.0" layoutY="296.0" mnemonicParsing="false" onAction="#EnviarMensaje" prefHeight="25.0" prefWidth="89.0" style="-fx-background-color: #1951F2; -fx-background-radius: 30;" text="Enviar" textFill="#f8f3f3" />
       <TextField fx:id="txtEscribirMensajes" layoutX="14.0" layoutY="296.0" prefHeight="25.0" prefWidth="261.0" promptText="Mensaje" style="-fx-background-radius: 20;" />

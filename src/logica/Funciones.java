@@ -1,9 +1,7 @@
 package logica;
 
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
@@ -18,7 +16,7 @@ public class Funciones {
 		System.out.println("LLEGUE A LA FUNCION");
 		try {
 			System.out.println("Voy a conectar el socket");
-			cliente = new Socket("192.168.1.5", 8000);
+			cliente = new Socket("localHost", 8000);
 			return cliente;
 		} catch (IOException e) {
 			System.out.println("Entro al try");

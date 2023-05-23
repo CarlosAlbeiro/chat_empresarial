@@ -54,7 +54,7 @@ public class HiloServidor extends Thread {
     private String hora1 = dia+"/"+mes+"/"+anio+"/"+"-"+hora+":"+minutos+":"+segundos;
     
 	
-	//Hilo encargado de las peticiones del cliente
+	//------------------------------------Hilo encargado de las peticiones del cliente---------------------------------------
 	public HiloServidor( Socket clientes, String cliente,ServidorControlador servi) throws Exception {
 		
 		if (verificarNombre(cliente)) {
@@ -84,19 +84,7 @@ public class HiloServidor extends Thread {
 		
 	}
 	
-//	private void envioHitorial() {
-//		int numeroUsuarios=(usuariosActivos.size())-1;
-//		String historial=a.leerArchivomensajes();
-//		
-//		try {
-//			usuariosActivos.get(numeroUsuarios).Hitorial(historial);
-//		} catch (Exception e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		
-//		
-//	}
+
 
 	//Iniciamos el hilo
 	public void run(){
@@ -126,7 +114,7 @@ public class HiloServidor extends Thread {
 			
 		}
 		
-		
+		// remueve los usuarios de arraylist
 		usuariosActivos.removeElement(this);
 		for (int i = 0; i < usuariosActivos.size(); i++) {
 			try {
@@ -136,6 +124,7 @@ public class HiloServidor extends Thread {
 				e.printStackTrace();
 			}
 		}
+		//a es una instancia de archivos
 		a.guardarUsuarios(nombre+" se desconecto hora: "+fecha);
 		servidor.mostrarMensaje(nombre+" se desconectado\n");
 		try {
@@ -145,11 +134,16 @@ public class HiloServidor extends Thread {
 		}
 		
 	}
+	// enviar historial
 	private void Hitorial(String msj) throws Exception{
 		enviar=new DataOutputStream(cliente.getOutputStream());
 		enviar.writeUTF(msj);
 	}
-	
+	/**
+	 * Manda el mensaje a todos los usuurios conectados y el objeto de arraylist de activos
+	 * @param msj
+	 * @throws Exception
+	 */
 	private void mensaje(String msj) throws Exception{
 		enviar=new DataOutputStream(cliente.getOutputStream());
 		enviar.writeUTF(msj);
@@ -164,6 +158,7 @@ public class HiloServidor extends Thread {
 		
 	}
 	
+	//verificacion de nombre 
 	private static boolean verificarNombre(String Nombre) {
 
 		Boolean disponible=false;

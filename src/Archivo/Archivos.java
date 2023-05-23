@@ -2,21 +2,19 @@ package Archivo;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-
-import logica.Mensaje;
 
 
 
+/**
+ * Description:
+ * Esta clase tiene algunas funcionalidades relacionadas con la manipulación de archivos.
+ * @author Ruben Garrido
+ * @author Carlos Galeano
+ */
 
 
 public class Archivos {
@@ -26,12 +24,15 @@ public class Archivos {
 	public static final String RUTA_ARCHIVO_MENSAJES = "src/Archivo/Mensajes.txt";
 	// Vamos a guardar historial de inicio sesion, usuarios, mensajes 
 	
-	
+	/**
+	 * Este método lee el contenido del archivo "HistorialUsuarios.txt" y lo devuelve como una cadena de texto.
+	 * @return
+	 */
 	public String leerArchivousuarios() {
     StringBuilder contenido = new StringBuilder();
     try {
-        FileReader fileReader = new FileReader(RUTA_ARCHIVO_HISTORIAL_USUARIOS);
-        BufferedReader bufferedReader = new BufferedReader(fileReader);
+        FileReader fileReader = new FileReader(RUTA_ARCHIVO_HISTORIAL_USUARIOS);//busca el archivo
+        BufferedReader bufferedReader = new BufferedReader(fileReader);// lee el contenido
 
         String linea;
         while ((linea = bufferedReader.readLine()) != null) {
@@ -48,6 +49,12 @@ public class Archivos {
     // Devolver el contenido como una cadena
     return contenido.toString();
 }
+	
+	/**
+	 * Este método agrega el contenido de la variable usuario al archivo "HistorialUsuarios.txt".
+	 *  Primero, lee el contenido existente del archivo, luego añade el nuevo usuario y guarda el resultado en el archivo.
+	 * @param usuario
+	 */
 	
 	//Escribir el archvio de usuario
 	public void guardarUsuarios(String usuario) {
@@ -71,7 +78,10 @@ public class Archivos {
 		}
 		
 	}
-	
+	/**
+	 * Este método lee el contenido del archivo "Mensajes.txt" y lo devuelve como una cadena de texto.
+	 * @return
+	 */
 	
 	public String leerArchivomensajes() {
 	    StringBuilder contenido = new StringBuilder();
@@ -95,6 +105,12 @@ public class Archivos {
 	    return contenido.toString();
 	}
 		
+	
+        /**
+         * Este método agrega el contenido de la variable mensaje al archivo "Mensajes.txt". 
+         * Al igual que en el método anterior, primero lee el contenido existente del archivo, añade el nuevo mensaje y guarda el resultado en el archivo.  	
+         * @param mensaje
+         */
 		//Escribir el archvio de usuario
 	public void guardarMensajes(String mensaje) {
 			String lectura=leerArchivomensajes();

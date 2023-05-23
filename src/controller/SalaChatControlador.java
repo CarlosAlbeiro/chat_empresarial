@@ -17,9 +17,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import logica.Funciones;
 import java.util.ArrayList;
-
 import javax.swing.JOptionPane;
-
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,6 +27,7 @@ import javafx.collections.ObservableList;
  * @author Ruben Garrido
  * 
  *  Description:
+ *  Esta actua como cliente 
  *  Esta Se utiliza para controlar la lógica y la interacción de la interfaz gráfica de usuario de una sala de chat.
  *  La clase tiene variables globales y métodos para realizar operaciones de conexión y comunicación con un servidor de chat.
  *  La clase interna Entrada implementa la interfaz Runnable y se utiliza como hilo para recibir y mostrar las respuestas del servidor de chat.
@@ -61,12 +60,23 @@ public class SalaChatControlador  {
     public SalaChatControlador() {
     	   
     }
+    
+    
+    /**
+     * Me perimite desactivar el campo de texto para que no se utilice 
+     */
+
+    public void initialize() {
+        // Desactivar el campo de texto al iniciar la interfaz
+        txtEscribirMensajes.setDisable(true);
+    }
 
     //Metodo conectar al servidor 
     @FXML
     void Conectar(ActionEvent event) {
     	nombreUsuario= txtNombre.getText();
-    	
+    	// Activar campo de text mensaje
+    	txtEscribirMensajes.setDisable(false);
     	
     	//Validacion de campos De nombre 
     	if (nombreUsuario == null || nombreUsuario.trim().isEmpty()) {
@@ -78,6 +88,7 @@ public class SalaChatControlador  {
             alert.showAndWait();
         } else {
         
+        	///Sino esta vacio haga el proceso de conectar al servidor
         	System.out.println("Me voy a conectar");
         	cliente=f.conectar();
         	f.ingreso(nombreUsuario);
@@ -128,33 +139,30 @@ public class SalaChatControlador  {
             alert.showAndWait();
         } else {
         
-        	 
+        	 // mandar mensaje al servidor 
             f.enviarMensaje(mensaje);
             txtEscribirMensajes.clear();
           
             txtEscribirMensajes.clear();
         	
-//            // El TextField contiene texto
-//            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-//            alert.setTitle("Campo No Vacío");
-//            alert.setHeaderText(null);
-//            alert.setContentText("El campo contiene texto: " + mensaje);
-//            alert.showAndWait();
         }
                 
-        
-       
 
     }
     
 
-  
+  //---------------------------------HILOCLIENTE------------------------------
     public class HiloCliente implements Runnable {
 
+    	/**
+    	 * Esta clase representa un hilo que se ejecuta en paralelo con otros hilos y se encarga de la comunicación con el servidor 
+    	 */
     	public void run() {
     		try {
 				
 				InputStream inStream =null;
+				
+				// Hace la comunicacion con servidor y este se encuentra todo el tiempo escuchando los mensajes y respuestas del server
 				while (true) {
 					inStream = cliente.getInputStream();
 					DataInputStream respuestaServidor= new DataInputStream(inStream);
@@ -177,11 +185,14 @@ public class SalaChatControlador  {
 					    ArrayList<String> listaRecibida = (ArrayList<String>) objetoRecibido;
 					    // Convierte el ArrayList a ObservableList
 					    ObservableList<String> observableList = FXCollections.observableArrayList(listaRecibida);
-					    
-						Platform.runLater(()->{
+
+					    //Se añadio este metodo para poder agregar los nombres a la lista
+					    Platform.runLater(()->{
 							// Agrega la lista al ListView
 						    listActivos.setItems(observableList);
 						});
+					    
+					    
 					}
 				}
 			} catch (Exception e) {
