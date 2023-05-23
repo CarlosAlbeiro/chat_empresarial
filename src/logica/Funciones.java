@@ -6,12 +6,19 @@ import java.io.OutputStream;
 import java.net.Socket;
 
 
-
+/**
+ * Encapsulador de funciones para enviar peticiones al servidor 
+ * @author Ruben Garrido
+ * @author Carlos Galeano
+ */
 public class Funciones {
 	//Declaramos el socket
 	public  Socket cliente;
 
-	
+	/**
+	 * 
+	 * @return devuelve el socket conectado
+	 */
 	public Socket conectar() {
 		System.out.println("LLEGUE A LA FUNCION");
 		try {
@@ -25,7 +32,10 @@ public class Funciones {
 		}
 	}
 
-	
+	/**
+	 * Funcion para enviar una peticion de ingreso al chat
+	 * @param nombreUsuario
+	 */
 	public void ingreso(String nombreUsuario) {
 		OutputStream outStream = null;
 		try {
@@ -41,7 +51,10 @@ public class Funciones {
 		}
 	}
 
-
+	/**
+	 * Funcion para enviar mensajes 
+	 * @param mensaje
+	 */
 	public void enviarMensaje(String mensaje) {
 		OutputStream mensajeSaliente = null;
 		try {

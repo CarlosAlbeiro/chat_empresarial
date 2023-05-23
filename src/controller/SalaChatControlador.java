@@ -34,8 +34,6 @@ import javafx.collections.ObservableList;
  *  También maneja la recepción de una lista de usuarios activos y la muestra en el ListView llamado listActivos.
  */
  
-
-
 public class SalaChatControlador  {
 
 	@FXML
@@ -73,6 +71,10 @@ public class SalaChatControlador  {
 
     //Metodo conectar al servidor 
     @FXML
+    /**
+     * Evento que permite conectar con el servidor 
+     * @param event
+     */
     void Conectar(ActionEvent event) {
     	nombreUsuario= txtNombre.getText();
     	// Activar campo de text mensaje
@@ -123,12 +125,13 @@ public class SalaChatControlador  {
     }
     
 //----------------------------------------metodo enviar mensaje------------------------------------------------------    
-    
+    /**
+     * Evento para enviar un mensaje 
+     * @param event
+     */
     public void EnviarMensaje(ActionEvent event) {
     	
-    	
         String mensaje = txtEscribirMensajes.getText();
-        
         
         if (mensaje == null || mensaje.trim().isEmpty()) {
             // El TextField está vacío
@@ -152,6 +155,12 @@ public class SalaChatControlador  {
     
 
   //---------------------------------HILOCLIENTE------------------------------
+    /**
+     * Hilo cliente que se inicia despues de conectar el socket para escuchar lo que nos dice el servidor 
+     * @author Ruben Garrido
+     * @author Carlos Galeano
+     *
+     */
     public class HiloCliente implements Runnable {
 
     	/**
@@ -187,6 +196,9 @@ public class SalaChatControlador  {
 					    ObservableList<String> observableList = FXCollections.observableArrayList(listaRecibida);
 
 					    //Se añadio este metodo para poder agregar los nombres a la lista
+					    /**
+					     * Hilo que permite modificar la interfaz de usuario 
+					     */
 					    Platform.runLater(()->{
 							// Agrega la lista al ListView
 						    listActivos.setItems(observableList);

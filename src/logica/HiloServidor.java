@@ -16,6 +16,12 @@ import java.util.Vector;
 import Archivo.Archivos;
 import controller.ServidorControlador;
 
+/**
+ * 
+ * @author Ruben Garrido
+ * @author Carlos Galeano
+ * clase hilo servidor 
+ */
 public class HiloServidor extends Thread {
 	
 	//Variable para enviar datos
@@ -55,7 +61,14 @@ public class HiloServidor extends Thread {
     
 	
 	//------------------------------------Hilo encargado de las peticiones del cliente---------------------------------------
-	public HiloServidor( Socket clientes, String cliente,ServidorControlador servi) throws Exception {
+	/**
+	 * Se contruye un hilo para que se encargue de las peticiones del socket
+	 * @param clientes
+	 * @param cliente
+	 * @param servi
+	 * @throws Exception
+	 */
+    public HiloServidor( Socket clientes, String cliente,ServidorControlador servi) throws Exception {
 		
 		if (verificarNombre(cliente)) {
 			throw new Excepciones("El nombre no está disponible");
@@ -85,8 +98,12 @@ public class HiloServidor extends Thread {
 	}
 	
 
-
+	
 	//Iniciamos el hilo
+	/**
+	 * Arranca el hilo especializado para un socket, recibe y da manejo a todas las peticiones 
+	 * de ese socket 
+	 */
 	public void run(){
 		
 		servidor.mostrarMensaje(nombre+" se conecto a la sala");
@@ -135,6 +152,11 @@ public class HiloServidor extends Thread {
 		
 	}
 	// enviar historial
+	/**
+	 * Manda como salida al hilo cliente el historial de todo el chat
+	 * @param msj
+	 * @throws Exception
+	 */
 	private void Hitorial(String msj) throws Exception{
 		enviar=new DataOutputStream(cliente.getOutputStream());
 		enviar.writeUTF(msj);
@@ -159,6 +181,11 @@ public class HiloServidor extends Thread {
 	}
 	
 	//verificacion de nombre 
+	/**
+	 * Funcion que devuelve la disponibilidad del nombre
+	 * @param Nombre
+	 * @return un boolean con la disponibilidad del nombre
+	 */
 	private static boolean verificarNombre(String Nombre) {
 
 		Boolean disponible=false;

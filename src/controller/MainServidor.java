@@ -31,6 +31,10 @@ public class MainServidor extends Application {
         
     }
 
+    /**
+     * Funcion main que inicia la parte del servidor
+     * @param args
+     */
     public static void main(String[] args) {
         launch(args);
     }
