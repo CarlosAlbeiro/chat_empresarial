@@ -13,7 +13,8 @@ import logica.HiloServidor;
 
 /**
  * 
- * @author 31285
+ * @author Ruben Garrido
+ * @author Carlos Galeano
  *
  */
 
