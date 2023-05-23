@@ -172,3 +172,15 @@ carlos se desconecto hora: Mon May 22 20:29:19 COT 2023
 carlos se conecto hora: Mon May 22 20:30:28 COT 2023
 carlos se desconecto hora: Mon May 22 20:30:28 COT 2023
 carlos se conecto hora: Mon May 22 20:33:12 COT 2023
+carlos se conecto hora: Mon May 22 20:43:59 COT 2023
+carlos se desconecto hora: Mon May 22 20:43:59 COT 2023
+Ruben se conecto hora: Mon May 22 20:44:58 COT 2023
+carlos se conecto hora: Mon May 22 20:45:10 COT 2023
+carlos se desconecto hora: Mon May 22 20:45:10 COT 2023
+carlos se conecto hora: Mon May 22 20:45:42 COT 2023
+carlos se desconecto hora: Mon May 22 20:45:42 COT 2023
+carlos se conecto hora: Mon May 22 20:49:15 COT 2023
+carloss se conecto hora: Mon May 22 20:49:30 COT 2023
+carlos se desconecto hora: Mon May 22 20:49:15 COT 2023
+carlos se conecto hora: Mon May 22 20:51:12 COT 2023
+carlos se desconecto hora: Mon May 22 20:51:12 COT 2023

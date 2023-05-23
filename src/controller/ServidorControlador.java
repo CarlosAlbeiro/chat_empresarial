@@ -56,6 +56,8 @@ public class ServidorControlador {
                     System.out.println("El nombre no está disponible. Por favor, elige otro nombre.");
                 	DataOutputStream enviar = new DataOutputStream(clienteSocket.getOutputStream());
             		enviar.writeUTF("Nombre repetido");
+            		clienteSocket.close();
+            		mostrarMensaje("Cliente desconectado: "+ clienteSocket.getInetAddress()+"Nombre repetido");
 
                 }       
             }
