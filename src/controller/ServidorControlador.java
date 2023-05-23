@@ -50,15 +50,13 @@ public class ServidorControlador {
                 try {
                 	 HiloServidor hilo= new HiloServidor(clienteSocket, nombre.readUTF(), this);
                 	 hilo.start();
-//                	 usuariosActivos.add(hilo);
+
                 } catch (Excepciones e) {
                 	
                     System.out.println("El nombre no está disponible. Por favor, elige otro nombre.");
-//                	enviar=new DataOutputStream(clienteSocket.getOutputStream());
-//            		enviar.writeUTF("Nombre repetido");
-                    clienteSocket.close();
-                    
-                    mostrarMensaje("Cliente desconectado: " + clienteSocket.getInetAddress()+" Nombre repetido");
+                	DataOutputStream enviar = new DataOutputStream(clienteSocket.getOutputStream());
+            		enviar.writeUTF("Nombre repetido");
+
                 }       
             }
         } catch (IOException e) {

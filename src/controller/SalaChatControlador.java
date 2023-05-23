@@ -17,6 +17,9 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import logica.Funciones;
 import java.util.ArrayList;
+
+import javax.swing.JOptionPane;
+
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -77,29 +80,16 @@ public class SalaChatControlador  {
         
         	System.out.println("Me voy a conectar");
         	cliente=f.conectar();
-        	Thread hiloRespuestas= new Thread(new Entrada());
+        	f.ingreso(nombreUsuario);
+        	Thread hiloRespuestas= new Thread(new HiloCliente());
         	hiloRespuestas.setDaemon(true);
         	hiloRespuestas.start();
         	botnConectar.setDisable(true);
      	    txtNombre.setDisable(true);
         	
-    		f.ingreso(nombreUsuario);
            
         }
-    	
-    	//Validacion en proceso de funcionalidad
-//    	if(cliente.isConnected()) {
-//    		
-//    		
-//		}else {
-//			Alert alert = new Alert(Alert.AlertType. ERROR);
-//            alert.setHeaderText(null);
-//            alert.setTitle("Error");
-//            alert.setContentText("Error nombre repetido");
-//            alert.showAndWait();
-//		}
-    	
-    	
+    	    	
     	//Actvia la teclado  "enter"
     	txtEscribirMensajes.setOnKeyPressed(new  EventHandler<KeyEvent>() {
 
@@ -159,17 +149,25 @@ public class SalaChatControlador  {
     
 
   
-    public class Entrada implements Runnable {
+    public class HiloCliente implements Runnable {
 
     	public void run() {
     		try {
-				String mensaje;
+				
 				InputStream inStream =null;
 				while (true) {
 					inStream = cliente.getInputStream();
 					DataInputStream respuestaServidor= new DataInputStream(inStream);
 					String respuesta = respuestaServidor.readUTF();
-					txtMostrarChat.appendText(respuesta+"\n");
+					if (respuesta.equals("Nombre repetido")) {
+						
+						JOptionPane.showInternalMessageDialog(null, "Nombre repetido\nIntente con otro difernte");
+						botnConectar.setDisable(false);
+						txtNombre.setDisable(false);
+					}else {
+						
+						txtMostrarChat.appendText(respuesta+"\n");
+					}
 			
 					listaEntrante=new ObjectInputStream(cliente.getInputStream());
 					
