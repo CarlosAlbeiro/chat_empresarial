@@ -55,23 +55,26 @@ public class HiloServidor extends Thread {
     
 	
 	//Hilo encargado de las peticiones del cliente
-	public HiloServidor( Socket clientes, String cliente,ServidorControlador servi) throws Excepciones {
+	public HiloServidor( Socket clientes, String cliente,ServidorControlador servi) throws Exception {
 		
 		if (verificarNombre(cliente)) {
 			throw new Excepciones("El nombre no está disponible");
 		}else {
 			System.out.println("HiloServidor soy el hilo del cliente: "+cliente);
 			a.guardarUsuarios(cliente+" se conecto hora: "+fecha+"\n");
+			String hitorial=a.leerArchivomensajes();
+			
 			this.servidor = servi;
 			this.cliente = clientes;
 			this.nombre = cliente;
 			usuariosActivos.add(this);
-			envioHitorial();
+			
+			usuariosActivos.get(usuariosActivos.size()-1).mensaje(hitorial);
+			
+//			envioHitorial();
 			for (int i = 0; i < usuariosActivos.size(); i++) {
 				try {
 					usuariosActivos.get(i).mensaje(nombre+" se conecto");
-					
-					
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -81,27 +84,19 @@ public class HiloServidor extends Thread {
 		
 	}
 	
-	
-
-
-
-	private void envioHitorial() {
-		int numeroUsuarios=usuariosActivos.size();
-		String historial=a.leerArchivomensajes();
-		
-		try {
-			usuariosActivos.get(numeroUsuarios).Hitorial(historial);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		
-	}
-
-
-
-
+//	private void envioHitorial() {
+//		int numeroUsuarios=(usuariosActivos.size())-1;
+//		String historial=a.leerArchivomensajes();
+//		
+//		try {
+//			usuariosActivos.get(numeroUsuarios).Hitorial(historial);
+//		} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//		
+//	}
 
 	//Iniciamos el hilo
 	public void run(){

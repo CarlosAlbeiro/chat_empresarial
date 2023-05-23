@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 carlos: hola -- Mon May 22 17:17:14 COT 2023
 ruben: todo bien? -- Mon May 22 17:17:21 COT 2023
 laura: si todo bien -- Mon May 22 17:17:26 COT 2023
@@ -100,11 +99,29 @@ Ruben: sda -- 22/5/2023/-18:4:32
 Ruben: asdas -- 22/5/2023/-18:4:32
 Ruben: sfs -- 22/5/2023/-18:4:32
 Ruben: cs -- 22/5/2023/-18:4:32
-=======
 carlos: hola -- 22/5/2023/-17:50:42
 camila: chao -- 22/5/2023/-17:51:14
 carlos: bueno -- 22/5/2023/-17:50:42
 natalia: msj de prueba -- 22/5/2023/-17:54:47
 ricardo: hola -- 22/5/2023/-17:57:39
 carlos: que mas -- 22/5/2023/-17:57:20
->>>>>>> Stashed changes
+carlos: hola -- 22/5/2023/-18:28:57
+Ruben: acsa -- 22/5/2023/-18:30:42
+carlos: hola -- 22/5/2023/-18:28:57
+carlos: hola2 -- 22/5/2023/-18:28:57
+Ruben: scsd -- 22/5/2023/-18:30:42
+Ruben: Holalalalala -- 22/5/2023/-18:30:42
+carlos: hola -- 22/5/2023/-18:28:57
+Ruben: jj -- 22/5/2023/-18:30:42
+Ruebne: fwe -- 22/5/2023/-18:39:49
+Ruebne: ere -- 22/5/2023/-18:39:49
+carlos: hola -- 22/5/2023/-18:39:41
+carlos: ssa -- 22/5/2023/-18:39:41
+carlos: dss -- 22/5/2023/-18:39:41
+carlos: sds -- 22/5/2023/-18:39:41
+jose: dfs -- 22/5/2023/-18:57:33
+carlos: hola -- 22/5/2023/-18:56:58
+jose: mucha gueva -- 22/5/2023/-18:57:33
+sharon: sdfs -- 22/5/2023/-18:59:8
+sharon: sds -- 22/5/2023/-18:59:8
+sharon: jjajajaa -- 22/5/2023/-18:59:8
